@@ -1,31 +1,28 @@
 public class StringBufferVsStringBuilder {
     public static void main(String[] args) {
-        int iterations = 1_000_000;
+        int iterations = 1_000_000; // 1 million iterations
         String text = "hello";
 
-        StringBuffer stringBuffer = new StringBuffer();
-        long startTime1 = System.nanoTime();
+        // Measure time for StringBuffer
+        long startTimeBuffer = System.nanoTime();
+        StringBuffer sbf = new StringBuffer();
         for (int i = 0; i < iterations; i++) {
-            stringBuffer.append(text);
+            sbf.append(text);
         }
-        long endTime1 = System.nanoTime();
-        long timeBuffer = endTime1 - startTime1;
+        long endTimeBuffer = System.nanoTime();
+        long durationBuffer = endTimeBuffer - startTimeBuffer;
 
-        StringBuilder stringBuilder = new StringBuilder();
-        long startTime2 = System.nanoTime();
+        // Measure time for StringBuilder
+        long startTimeBuilder = System.nanoTime();
+        StringBuilder sbd = new StringBuilder();
         for (int i = 0; i < iterations; i++) {
-            stringBuilder.append(text);
+            sbd.append(text);
         }
-        long endTime2 = System.nanoTime();
-        long timeBuilder = endTime2 - startTime2;
+        long endTimeBuilder = System.nanoTime();
+        long durationBuilder = endTimeBuilder - startTimeBuilder;
 
-        System.out.println("Time taken by StringBuffer: " + timeBuffer / 1_000_000.0 + " ms");
-        System.out.println("Time taken by StringBuilder: " + timeBuilder / 1_000_000.0 + " ms");
-
-        if (timeBuffer > timeBuilder) {
-            System.out.println("StringBuilder is faster.");
-        } else {
-            System.out.println("StringBuffer is faster.");
-        }
+        // Print results
+        System.out.println("Time taken by StringBuffer: " + (durationBuffer / 1_000_000) + " ms");
+        System.out.println("Time taken by StringBuilder: " + (durationBuilder / 1_000_000) + " ms");
     }
 }

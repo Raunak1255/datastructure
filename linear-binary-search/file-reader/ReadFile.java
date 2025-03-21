@@ -4,15 +4,19 @@ import java.io.IOException;
 
 public class ReadFile {
     public static void main(String[] args) {
-        try(FileReader fr=new FileReader("age.txt");
-        BufferedReader br=new BufferedReader(fr)){
+        // Try-with-resources to ensure file is closed automatically
+        try (FileReader fr = new FileReader("sample.txt");
+             BufferedReader br = new BufferedReader(fr)) {
+            
             String line;
-            while((line=br.readLine())!=null){
-                System.out.println(line);
+            // Read file line by line
+            while ((line = br.readLine()) != null) {
+                System.out.println(line); // Print each line
             }
-        }
-        catch(IOException e){
-            System.out.println(e.getMessage());
+        } 
+        catch (IOException e) {
+            // Handle exceptions related to file reading
+            System.out.println("Error reading file: " + e.getMessage());
         }
     }
 }
